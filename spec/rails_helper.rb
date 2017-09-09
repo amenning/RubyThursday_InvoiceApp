@@ -7,7 +7,6 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'simple_bdd'
 require 'shoulda/matchers'
-require 'pundit/rspec'
 include ActionDispatch::TestProcess
 
 Capybara.javascript_driver = :webkit
@@ -39,11 +38,6 @@ RSpec.configure do |config|
       with.test_framework :rspec
       with.library :rails
     end
-  end
-
-  config.include Warden::Test::Helpers
-  config.before :suite do
-    Warden.test_mode!
   end
 
   config.infer_spec_type_from_file_location!
