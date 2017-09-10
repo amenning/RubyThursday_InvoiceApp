@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'figaro'
 gem 'omniauth-stripe-connect'
+gem 'stripe'
 
 group :development, :test do
   gem 'pry'

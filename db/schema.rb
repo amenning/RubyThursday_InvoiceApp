@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910011351) do
+ActiveRecord::Schema.define(version: 20170910024725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170910011351) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "vendor_id"
+    t.string "id_for_plan"
     t.index ["vendor_id"], name: "index_invoices_on_vendor_id"
   end
 
@@ -41,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170910011351) do
     t.string "stripe_access_token"
     t.string "stripe_refresh_token"
     t.string "stripe_publishable_key"
-    t.string "stripe_user_id"
+    t.string "stripe_uid"
     t.string "provider"
     t.index ["email"], name: "index_vendors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true

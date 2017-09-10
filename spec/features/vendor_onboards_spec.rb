@@ -18,7 +18,7 @@ feature 'vendor onboards for site' do
     click_link 'CONNECT TO STRIPE'
     expect(page).to have_content 'Congrats on connecting your Stripe account!'
     vendor = Vendor.last
-    expect(vendor.stripe_user_id).not_to eq nil
+    expect(vendor.stripe_uid).not_to eq nil
     expect(page).to have_link('CREATE A PAYMENT LINK', href: new_invoice_path)
   end
 

@@ -3,7 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @vendor = current_vendor
     if @vendor.update_without_password({
       provider: request.env['omniauth.auth'].provider,
-      stripe_user_id: request.env['omniauth.auth'].uid,
+      stripe_uid: request.env['omniauth.auth'].uid,
       stripe_access_token: request.env['omniauth.auth'].credentials.token,
       stripe_refresh_token: request.env['omniauth.auth'].credentials.token,
       stripe_publishable_key: request.env['omniauth.auth'].info.stripe_publishable_key

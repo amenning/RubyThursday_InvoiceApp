@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Vendor manages invoices' do
-  let :vendor { FactoryGirl.create(:vendor) }
+  let :vendor { FactoryGirl.create(:vendor_with_stripe_acct) }
 
   before do
     login_as(vendor, scope: :vendor)
@@ -18,6 +18,11 @@ feature 'Vendor manages invoices' do
     expect(Invoice.count).to eq 1
     expect(page).to have_content 'Invoice successfully created!'
     expect(page).to have_content 'INVOICES'
-    # ADD MAKE SURE SUBSCRIPTION CREATED
+
+    invoice = Invoice.last
+    expect(invoice.id_for_plan).to eq 'Awesome invoice'
+
+    plan = Stripe::Plan.retrieve(invoice.id_for_plan, stripe_account: vendor.stripe_uid)
+    plan.delete
   end
 end
