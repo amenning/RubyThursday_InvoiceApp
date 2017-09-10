@@ -13,6 +13,19 @@ Capybara.javascript_driver = :webkit
 
 ActiveRecord::Migration.maintain_test_schema!
 
+OmniAuth.config.test_mode = true
+
+OmniAuth.config.mock_auth[:stripe_connect] = OmniAuth::AuthHash.new({
+  provider: 'stripe',
+  uid: '123545',
+  credentials: {
+    token: '13123123123'
+  },
+  info: {
+    stripe_publishable_key: '123123123123'
+  }
+})
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

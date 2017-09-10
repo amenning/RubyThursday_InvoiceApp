@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  devise_for :vendors, controllers: {
+    registrations: 'registrations',
+    omniauth_callbacks: 'omniauth_callbacks'
+  }
 
-  devise_for :vendors
-  root "home#index"
+  get 'connect_to_stripe', to: 'vendor_onboarding#connect_to_stripe'
+  root 'home#index'
 end

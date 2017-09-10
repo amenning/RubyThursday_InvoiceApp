@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'figaro'
+gem 'omniauth-stripe-connect'
 
 group :development, :test do
   gem 'pry'
