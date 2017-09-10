@@ -1,0 +1,26 @@
+<h1>New Invoice</h1>
+
+<%= form_for @invoice do |f| %>
+  <% if @invoice.errors.any? %>
+    <div id='error_explanation'>
+      <h2>Oops! We couldn't create your invoice.  Please see below.</h2>
+
+      <ul>
+        <% @invoice.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :description %><br>
+  <%= f.text_area :description %><br>
+
+  <%= f.label :amount %><br>
+  <%= f.text_field :amount %><br>
+
+  <%= f.submit 'CREATE INVOICE' %>
+<% end %>
