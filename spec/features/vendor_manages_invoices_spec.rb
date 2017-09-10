@@ -20,7 +20,7 @@ feature 'Vendor manages invoices' do
     expect(page).to have_content 'INVOICES'
 
     invoice = Invoice.last
-    expect(invoice.id_for_plan).to eq 'Awesome invoice'
+    expect(invoice.id_for_plan).to eq invoice.name + invoice.id.to_s
 
     plan = Stripe::Plan.retrieve(invoice.id_for_plan, stripe_account: vendor.stripe_uid)
     plan.delete

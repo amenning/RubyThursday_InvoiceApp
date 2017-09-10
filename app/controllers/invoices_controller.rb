@@ -10,7 +10,7 @@ class InvoicesController < ApplicationController
   end
 
   def create
-    @invoice = current_vendor.invoices.create(invoice_params)
+    @invoice = current_vendor.invoices.build(invoice_params)
     response = create_stripe_plan(current_vendor, @invoice)
     @invoice.id_for_plan = response.id
 
@@ -37,7 +37,7 @@ class InvoicesController < ApplicationController
           interval: 'month',
           name: invoice.name,
           currency: 'usd',
-          id: invoice.name
+          id: invoice.name + Invoice.maximum(:id).to_i.next.to_s
         },
         stripe_account: vendor.stripe_uid
       )
