@@ -9,7 +9,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       stripe_publishable_key: request.env['omniauth.auth'].info.stripe_publishable_key
     })
       # anything else you need to do in response..
-      redirect_to root_path,
+      redirect_to stripe_connect_confirmation_path,
         notice: 'Congrats on connecting your Stripe account!'
     else
       redirect_to connect_to_stripe_path,

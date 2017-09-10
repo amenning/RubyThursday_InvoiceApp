@@ -3,4 +3,7 @@ class VendorOnboardingController < ApplicationController
 
   def connect_to_stripe
   end
+
+  def stripe_connect_confirmation
+  end
 end
