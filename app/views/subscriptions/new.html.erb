@@ -1,0 +1,18 @@
+<!-- Used to display form errors -->
+<div id='card-errors' role='alert'></div>
+
+<div id='stripe_error'>
+  <noscript>Javascript is not enabled and is required for this form.  First enable it in your web browser settings.</noscript>
+</div>
+
+<%= @invoice.name %>
+
+<%= form_with(model: [@invoice, @subscription], html: {id: 'credit_card_form'}) do |f| %>
+  <%= f.text_field :customer_email, class:'credit-card-email', placeholder: 'Email', required: 'required' %>
+
+  <div id='card-element'>
+    <!-- a Stripe Element will be inserted here. -->
+  </div>
+
+  <%= f.submit 'COMPLETE PAYMENT' %>
+<% end %>

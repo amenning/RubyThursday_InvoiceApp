@@ -33,7 +33,7 @@ class InvoicesController < ApplicationController
     def create_stripe_plan(vendor, invoice)
       Stripe::Plan.create(
         {
-          amount: invoice.amount,
+          amount: invoice.amount * 100,
           interval: 'month',
           name: invoice.name,
           currency: 'usd',

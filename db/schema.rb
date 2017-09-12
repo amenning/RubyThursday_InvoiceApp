@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910024725) do
+ActiveRecord::Schema.define(version: 20170911235404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20170910024725) do
     t.bigint "vendor_id"
     t.string "id_for_plan"
     t.index ["vendor_id"], name: "index_invoices_on_vendor_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "invoice_id"
+    t.string "id_for_subscription"
+    t.string "id_for_customer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "customer_email"
+    t.index ["invoice_id"], name: "index_subscriptions_on_invoice_id"
   end
 
   create_table "vendors", force: :cascade do |t|
@@ -49,4 +59,5 @@ ActiveRecord::Schema.define(version: 20170910024725) do
   end
 
   add_foreign_key "invoices", "vendors"
+  add_foreign_key "subscriptions", "invoices"
 end
