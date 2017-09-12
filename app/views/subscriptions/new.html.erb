@@ -8,6 +8,18 @@
 <%= @invoice.name %>
 
 <%= form_with(model: [@invoice, @subscription], html: {id: 'credit_card_form'}) do |f| %>
+  <% if @subscription.errors.any? %>
+    <div id='error_explanation'>
+      <h2>Oops! We couldn't create your subscription.  Please see below.</h2>
+
+      <ul>
+        <% @subscription.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.text_field :customer_email, class:'credit-card-email', placeholder: 'Email', required: 'required' %>
 
   <div id='card-element'>

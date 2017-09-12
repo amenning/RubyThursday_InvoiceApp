@@ -1,4 +1,4 @@
-var stripe = Stripe('pk_test_NPw6VYMxG9TrHbmgdd08zLfP');
+var stripe = Stripe('pk_test_mxd7lirfDZVwj4p74RpQeGGr');
 var elements = stripe.elements();
 
 var card = elements.create('card', {

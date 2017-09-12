@@ -16,7 +16,12 @@ feature 'Client pays invoice' do
     click_button 'COMPLETE PAYMENT'
 
     expect(page).to have_content 'THANK YOU!'
+    expect(Subscription.count).to eq 1
     subscription = Subscription.last
-    expect(subscription.customer_email).to eq client_email
+    expect(subscription).to have_attributes(
+      customer_email: client_email,
+      id_for_subscription: a_string_starting_with('sub'),
+      id_for_customer: a_string_starting_with('cus')
+    )
   end
 end

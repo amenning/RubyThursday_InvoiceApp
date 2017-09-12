@@ -28,7 +28,6 @@ OmniAuth.config.mock_auth[:stripe_connect] = OmniAuth::AuthHash.new({
 
 Capybara::Webkit.configure do |config|
   config.ignore_ssl_errors
-  config.raise_javascript_errors = false
   config.allow_url('js.stripe.com')
   config.allow_url('m.stripe.com')
   config.allow_url('stripensrq.global.ssl.fastly.net')
