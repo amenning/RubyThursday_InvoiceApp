@@ -18,7 +18,7 @@ feature 'Client pays invoice' do
       fill_in 'cvc', with: '123'
     end
     click_button 'PLACE ORDER NOW'
-
+    sleep(5) #inconsistent pass/fail because of JS
     expect(page).to have_content 'THANK YOU!'
     expect(Subscription.count).to eq 1
     subscription = Subscription.last
