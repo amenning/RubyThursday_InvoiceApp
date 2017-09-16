@@ -30,6 +30,9 @@ class SubscriptionsController < ApplicationController
         end
       end
     end
+  rescue Exception => e
+    flash[:alert] = 'Sorry we encountered an error: ' + e.message
+    redirect_to new_invoice_subscription_path(@invoice)
   end
 
   def confirmation
