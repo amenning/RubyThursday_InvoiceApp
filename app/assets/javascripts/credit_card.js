@@ -1,7 +1,17 @@
 var stripe = Stripe('pk_test_mxd7lirfDZVwj4p74RpQeGGr');
+var style = {
+  base: {
+    fontSize: '14px',
+    fontFamily: "'Open Sans', sans-serif",
+    lineHeight: '1.428571429',
+    color: '#333333',
+  }
+};
+
 var elements = stripe.elements();
 
 var card = elements.create('card', {
+  style: style,
   hidePostalCode: true
 });
 

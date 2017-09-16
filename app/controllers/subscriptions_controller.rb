@@ -2,6 +2,10 @@ class SubscriptionsController < ApplicationController
   def new
     @invoice = Invoice.find(params[:invoice_id])
     @subscription = @invoice.subscriptions.build
+    vendor = @invoice.vendor
+    connected_stripe_account = Stripe::Account.retrieve(vendor.stripe_uid)
+    @business_name = connected_stripe_account.business_name
+    @statement_descriptor = connected_stripe_account.statement_descriptor
   end
 
   def create

@@ -1,30 +1,113 @@
-<!-- Used to display form errors -->
-<div id='card-errors' role='alert'></div>
-
 <div id='stripe_error'>
   <noscript>Javascript is not enabled and is required for this form.  First enable it in your web browser settings.</noscript>
 </div>
 
-<%= @invoice.name %>
-
-<%= form_with(model: [@invoice, @subscription], html: {id: 'credit_card_form'}) do |f| %>
-  <% if @subscription.errors.any? %>
-    <div id='error_explanation'>
-      <h2>Oops! We couldn't create your subscription.  Please see below.</h2>
-
-      <ul>
-        <% @subscription.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class='invoice-bkg'>
+  <div class='w-container'>
+    <div class='invoice-head'>
+      <h1 class='invoice-title'><%= @invoice.name %></h1>
+       <div class='invoice-subtitle-blk'><!--%= image_tag 'lock-grey-3.png', class: 'small-lock-icon' %-->
+         <div class='invoice-subtitle'>Payment Secured By 128-bit SSL Encryption</div>
+       </div>
     </div>
-  <% end %>
-
-  <%= f.text_field :customer_email, class:'credit-card-email', placeholder: 'Email', required: 'required' %>
-
-  <div id='card-element'>
-    <!-- a Stripe Element will be inserted here. -->
   </div>
+  <div class='invoice-flex-cont'>
+    <div class='invoice-form'>
+      <div class='w-row'>
+        <div class='w-col w-col-6'>
+          <div class='invoice-form-info'>
+            <div class='invoice-about-row w-row'>
+              <div class='w-col w-col-2 w-col-small-2 w-col-tiny-2'><img class='invoice-dba-logo' src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"></div>
+              <div class='w-col w-col-10 w-col-small-10 w-col-tiny-10'>
+                <div class='invoice-about-txt'><%= @business_name %></div>
+                <div class='invoice-about-txt-bold'><%= @statement_descriptor %></div>
+              </div>
+            </div>
+            <div class='invoice-about-row w-row'>
+              <div class='w-col w-col-2 w-col-small-2 w-col-tiny-2'><!--%= image_tag 'credit-card-1.png', class: 'cred-card-img' %--></div>
+              <div class='w-col w-col-10 w-col-small-10 w-col-tiny-10'>
+                <div class='invoice-about-txt'>Amount Due</div>
+                <div class='invoice-about-txt-bold'><%= number_to_currency(@invoice.amount) %></div>
+              </div>
+            </div>
+            <div class='invoice-about-row w-row'>
+              <div class='w-col w-col-2 w-col-small-2 w-col-tiny-2'><!--%= image_tag 'paytype.png', class: 'paytype-img' %--></div>
+              <div class='w-col w-col-10 w-col-small-10 w-col-tiny-10'>
+                <div class='invoice-about-txt'>Subscription</div>
+                <div class='invoice-about-txt-bold'>Monthly</div>
+              </div>
+            </div>
+            <div class='invoice-about-row w-row'>
+              <div class='w-col w-col-2 w-col-small-2 w-col-tiny-2'><!--%= image_tag 'descript-grey.png', class: 'paytype-img' %--></div>
+              <div class='w-col w-col-10 w-col-small-10 w-col-tiny-10'>
+                <div class='invoice-about-txt'>Description</div>
+                <div class='invoice-about-txt-bold'><%= simple_format(@invoice.description) %></div>
+              </div>
+            </div>
+            <div class='invoice-about-row invoice-about-row-no-bord w-row'>
+              <div class='w-col w-col-2 w-col-small-2 w-col-tiny-2'><!--%= image_tag 'support.png', class: 'support-icon' %--></div>
+              <div class='w-col w-col-10 w-col-small-10 w-col-tiny-10'>
+                <div class='invoice-about-txt'>Need Help</div>
+                <div class='invoice-about-txt-bold'>Contact us: <span class='blue-txt'>support@email.com</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='w-col w-col-6'>
+          <div class='invoice-secure-logo-row w-row'>
+           <div class='w-clearfix w-col w-col-9 w-col-small-9 w-col-tiny-9'><!--%= image_tag 'secure-payment.png', class: 'secure-payment-img' %--></div>
+           <div class='w-clearfix w-col w-col-3 w-col-small-3 w-col-tiny-3'><!--%= image_tag 'secure-encrypt.png', class: 'secure-encrypt-img' %--></div>
+          </div>
+        </div>
+        <div class='invoice=payment-info-row w-row'>
+          <div class='w-col w-col-6 w-col-small-6 w-col-tiny-6'>
+           <div class='invoice-pay-info text-block'>PAYMENT INFO</div>
+          </div>
+          <div class="w-col w-col6 w-col-small-6 w-col-tiny-6"><!--%= image_tag 'creditcards.png', class: 'cred-card-logos-img' %--></div>
+        </div>
+        <div class='w-form'>
+          <%= form_with(model: [@invoice, @subscription], html: {id: 'credit_card_form'}, data: { disable_with: "Please wait..."}) do |f| %>
+              <% if @subscription.errors.any? %>
+              <!-- Used to display form errors -->
+              <div id='card-errors' role='alert'></div>
+              <div id='error_explanation'>
+                <h2>Oops! We couldn't create your subscription.  Please see below.</h2>
 
-  <%= f.submit 'COMPLETE PAYMENT' %>
-<% end %>
+                <ul>
+                  <% @subscription.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <label class='invoice-field-label' for='email'>Email Address</label>
+            <%= f.text_field :customer_email, class:'invoice-text-field w-input', placeholder: 'name@example.com', required: 'required', autofocus: 'autofocus', maxlength: '256', type: 'email' %>
+
+            <div class='invoice-cred-card-blk'>
+              <div class='w-col w-col-6 w-col-small-6 w-col-tiny-6'><label class='invoice-field-label' for='Card-Number'>Card Number</label></div>
+              <div class='w-clearfix w-col w-col-6 w-col-small-6 w-col-tiny-6'><!--%= image_tag 'powered_by_stripe.png', class: 'stripe-logo' %--></div>
+              <div id='card-element' class='invoice-text-field w-input'>
+                <!-- a Stripe Element will be inserted here. -->
+              </div>
+            </div>
+
+            <div class='invoice-order-btn w-inline-block'>
+              <%= button_tag(type: 'submit', class: 'invoice-order-btn w-inline-block invoice-order-btn-txt') do %>
+                <span><!--%= image_tag 'lock-white.png', class: 'lock-white-img' %--> PLACE ORDER NOW</span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class='invoice-footer'>
+          <div class='w-row'>
+            <div class='w-clearfix w-col w-col-6 w-col-small-6 w-col-tiny-6'>
+              <div class='invoice-footer-txt'>Powered by</div>
+            </div>
+            <div class='w-col w-col-6 w-col-small-6 w-col-tiny-6'><a class='imvoice-footer-logo w-inling-block' href='#'><!--%= image_tag 'logo.png', class: 'logo' %--></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

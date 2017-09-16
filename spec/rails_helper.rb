@@ -32,6 +32,8 @@ Capybara::Webkit.configure do |config|
   config.allow_url('m.stripe.com')
   config.allow_url('stripensrq.global.ssl.fastly.net')
   config.allow_url('api.stripe.com')
+  config.allow_url("ajax.googleapis.com")
+  config.allow_url("d3e54v103j8qbb.cloudfront.net")
 end
 
 RSpec.configure do |config|
