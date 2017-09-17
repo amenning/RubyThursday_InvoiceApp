@@ -16,4 +16,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         alert: 'Please connect to Stripe before you can continue.'
     end
   end
+
+  def failure
+    redirect_to connect_to_stripe_path, alert: 'Stripe returned an error message: ' + params[:error_description]
+  end
 end
