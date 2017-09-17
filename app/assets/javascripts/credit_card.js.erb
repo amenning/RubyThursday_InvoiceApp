@@ -1,4 +1,4 @@
-var stripe = Stripe('pk_test_mxd7lirfDZVwj4p74RpQeGGr');
+var stripe = Stripe("<%= ENV['stripe_publishable_key'] %>");
 var style = {
   base: {
     fontSize: '14px',
